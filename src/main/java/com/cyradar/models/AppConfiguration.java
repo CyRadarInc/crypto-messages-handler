@@ -60,7 +60,13 @@ public class AppConfiguration {
      * Flag used to identify the Burp Extender tool.
      */
     public static final int TOOL_EXTENDER = 0x00000400;
-    private boolean enabled;
+
+    public static final int LOG_VERBOSITY_LEVEL_DEBUG = 3;
+    public static final int LOG_VERBOSITY_LEVEL_INFO = 2;
+    public static final int LOG_VERBOSITY_LEVEL_WARN = 1;
+    public static final int LOG_VERBOSITY_LEVEL_ERROR = 0;
+
+    private int verbosityLevel;
     private Map<Integer, Boolean> toolScopes;
     private List<InterceptConfiguration> interceptConfigurations;
 
@@ -77,6 +83,7 @@ public class AppConfiguration {
         ret.toolScopes.put(TOOL_DECODER, Boolean.FALSE);
         ret.toolScopes.put(TOOL_COMPARER, Boolean.FALSE);
         ret.toolScopes.put(TOOL_EXTENDER, Boolean.FALSE);
+        ret.verbosityLevel = LOG_VERBOSITY_LEVEL_INFO;
         return ret;
     }
 
@@ -85,12 +92,12 @@ public class AppConfiguration {
         interceptConfigurations = new ArrayList<>();
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public int getVerbosityLevel() {
+        return verbosityLevel;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setVerbosityLevel(int verbosityLevel) {
+        this.verbosityLevel = verbosityLevel;
     }
 
     public Map<Integer, Boolean> getToolScopes() {

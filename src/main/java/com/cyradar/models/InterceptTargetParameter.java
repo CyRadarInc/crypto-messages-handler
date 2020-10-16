@@ -21,6 +21,8 @@ public class InterceptTargetParameter {
     public static InterceptTargetParameter getDefault() {
         InterceptTargetParameter ret = new InterceptTargetParameter();
         ret.paramName = "";
+        ret.matchGroup = -1;
+        ret.matchPosition = "";
         ret.usingRegex = false;
         ret.urlDecodeBefore = true;
         ret.urlEncodeAfter = true;

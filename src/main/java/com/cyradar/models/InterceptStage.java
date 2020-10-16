@@ -54,4 +54,12 @@ public class InterceptStage extends HashMap<String, Object> {
     // cipher encodings
     public static final String CIPHER_ENCODING_HEX = "Hexadecimal";
     public static final String CIPHER_ENCODING_BASE64 = "Base64";
+
+    public static InterceptStage getDefault() {
+        InterceptStage stage = new InterceptStage();
+        stage.put(CTX_ALGORITHM, ALG_BASE64);
+        stage.put(CTX_MODE, MODE_ENCODE);
+        stage.put(CTX_CHARSET, CHARSET_UTF8);
+        return stage;
+    }
 }

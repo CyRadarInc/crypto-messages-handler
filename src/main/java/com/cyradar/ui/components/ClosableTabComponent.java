@@ -62,6 +62,14 @@ public final class ClosableTabComponent extends javax.swing.JPanel {
         tf.setCaretPosition(tf.getText().length());
     }
 
+    public void stopEditing() {
+        String currentText = label.getText();
+        label.setText(tf.getText());
+        tf.setVisible(false);
+        label.setVisible(true);
+        firePropertyChange("title", currentText, tf.getText());
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,6 +99,7 @@ public final class ClosableTabComponent extends javax.swing.JPanel {
         };
         button = new javax.swing.JButton();
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(-5, 0, -5, 0));
         setOpaque(false);
 
         label.setText("Untitled");
@@ -148,16 +157,12 @@ public final class ClosableTabComponent extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonMouseExited
 
     private void tfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFocusLost
-        label.setText(tf.getText());
-        tf.setVisible(false);
-        label.setVisible(true);
+        stopEditing();
     }//GEN-LAST:event_tfFocusLost
 
     private void tfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            label.setText(tf.getText());
-            tf.setVisible(false);
-            label.setVisible(true);
+            stopEditing();
         }
     }//GEN-LAST:event_tfKeyReleased
 

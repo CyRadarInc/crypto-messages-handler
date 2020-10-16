@@ -26,6 +26,7 @@ public class InterceptTargetUrl {
     public static InterceptTargetUrl getDefault() {
         InterceptTargetUrl ret = new InterceptTargetUrl();
         ret.messageType = MESSAGE_TYPE_REQUEST;
+        ret.url = "";
         ret.urlType = URL_TYPE_ALL;
         return ret;
     }

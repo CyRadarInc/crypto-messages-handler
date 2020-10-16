@@ -6,6 +6,7 @@
 package com.cyradar.common;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 /**
  *
@@ -32,5 +33,13 @@ public class Utils {
             buffer.put((byte) Integer.parseInt(str, 16));
         }
         return buffer.array();
+    }
+
+    public static byte[] concat(byte[] a, byte[] b) {
+        int lenA = a.length;
+        int lenB = b.length;
+        byte[] c = Arrays.copyOf(a, lenA + lenB);
+        System.arraycopy(b, 0, c, lenA, lenB);
+        return c;
     }
 }

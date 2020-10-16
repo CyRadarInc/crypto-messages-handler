@@ -70,12 +70,14 @@ public class InterceptStageForm extends javax.swing.JPanel {
         rbRsaKeyBase64.addItemListener(rBFormatItemStateChange);
     }
 
-    public void setModel(InterceptStage model) {
+    public void setInterceptStage(InterceptStage model) {
         try {
             String alg = (String) model.get(InterceptStage.CTX_ALGORITHM);
             CardLayout mainLayout = (CardLayout) algCategoryPanel.getLayout();
             switch (alg) {
                 case InterceptStage.ALG_BASE64:
+                    clearEncryptionPanel();
+                    clearHashingPanel();
                     rbCategoryEncoding.setSelected(true);
                     rbEncodingBase64Alg.setSelected(true);
                     mainLayout.show(algCategoryPanel, "algEncodingPanel");
@@ -83,6 +85,8 @@ public class InterceptStageForm extends javax.swing.JPanel {
                     cmbEncodingCharset.setSelectedItem(model.get(InterceptStage.CTX_CHARSET));
                     break;
                 case InterceptStage.ALG_HEX:
+                    clearEncryptionPanel();
+                    clearHashingPanel();
                     rbCategoryEncoding.setSelected(true);
                     rbEncodingHexAlg.setSelected(true);
                     mainLayout.show(algCategoryPanel, "algEncodingPanel");
@@ -92,6 +96,9 @@ public class InterceptStageForm extends javax.swing.JPanel {
                 case InterceptStage.ALG_AES_CBC_PKCS5_PADDING:
                 case InterceptStage.ALG_AES_EBC_PKCS5_PADDING:
                 case InterceptStage.ALG_AES_CTR_NOPADDING:
+                    clearEncodingPanel();
+                    clearRSAPanel();
+                    clearHashingPanel();
                     rbCategoryEncryption.setSelected(true);
                     rbAlgAES.setSelected(true);
                     mainLayout.show(algCategoryPanel, "algEncryptionPanel");
@@ -119,7 +126,7 @@ public class InterceptStageForm extends javax.swing.JPanel {
                             rbAesIvRaw.setVisible(true);
                             rbAesIvHex.setVisible(true);
                             rbAesIvBase64.setVisible(true);
-                            String ivFormat = (String) model.get(InterceptStage.CTX_KEY_FORMAT);
+                            String ivFormat = (String) model.get(InterceptStage.CTX_IV_FORMAT);
                             rbAesIvRaw.setSelected(ivFormat.equals(InterceptStage.FORMAT_RAW));
                             rbAesIvHex.setSelected(ivFormat.equals(InterceptStage.FORMAT_HEX));
                             rbAesIvBase64.setSelected(ivFormat.equals(InterceptStage.FORMAT_BASE64));
@@ -135,6 +142,9 @@ public class InterceptStageForm extends javax.swing.JPanel {
                     cmbAesCipherEncoding.setSelectedItem(model.get(InterceptStage.CTX_CIPHER_ENCODING));
                     break;
                 case InterceptStage.ALG_RSA_ECB_PKCS1PADDING:
+                    clearEncodingPanel();
+                    clearAESPanel();
+                    clearHashingPanel();
                     rbCategoryEncryption.setSelected(true);
                     rbAlgRSA.setSelected(true);
                     mainLayout.show(algCategoryPanel, "algEncryptionPanel");
@@ -152,6 +162,8 @@ public class InterceptStageForm extends javax.swing.JPanel {
                 case InterceptStage.ALG_SHA256:
                 case InterceptStage.ALG_SHA384:
                 case InterceptStage.ALG_SHA512:
+                    clearEncodingPanel();
+                    clearEncryptionPanel();
                     rbCategoryHashing.setSelected(true);
                     mainLayout.show(algCategoryPanel, "algHashingPanel");
                     cmbHashAlgorithms.setSelectedItem(alg);
@@ -165,51 +177,97 @@ public class InterceptStageForm extends javax.swing.JPanel {
         }
     }
 
-    public InterceptStage getModel() {
-        InterceptStage model = new InterceptStage();
+    public InterceptStage getInterceptStage() {
+        InterceptStage stage = new InterceptStage();
         if (rbCategoryEncoding.isSelected()) {
-            String alg = rbEncodingHexAlg.isSelected() ? InterceptStage.ALG_HEX : InterceptStage.ALG_HEX;
-            model.put(InterceptStage.CTX_ALGORITHM, alg);
-            model.put(InterceptStage.CTX_MODE, (String) cmbEncodingMode.getSelectedItem());
-            model.put(InterceptStage.CTX_CHARSET, (String) cmbEncodingCharset.getSelectedItem());
+            String alg = rbEncodingHexAlg.isSelected() ? InterceptStage.ALG_HEX : InterceptStage.ALG_BASE64;
+            stage.put(InterceptStage.CTX_ALGORITHM, alg);
+            stage.put(InterceptStage.CTX_MODE, (String) cmbEncodingMode.getSelectedItem());
+            stage.put(InterceptStage.CTX_CHARSET, (String) cmbEncodingCharset.getSelectedItem());
         } else if (rbCategoryEncryption.isSelected()) {
             // AES algorithm
             if (rbAlgAES.isSelected()) {
                 String alg = (String) cmbAesAlgorithms.getSelectedItem();
-                model.put(InterceptStage.CTX_ALGORITHM, alg);
-                model.put(InterceptStage.CTX_MODE, (String) cmbAesMode.getSelectedItem());
-                model.put(InterceptStage.CTX_CHARSET, (String) cmbAesCharset.getSelectedItem());
-                model.put(InterceptStage.CTX_KEY, tfAesSecret.getText());
+                stage.put(InterceptStage.CTX_ALGORITHM, alg);
+                stage.put(InterceptStage.CTX_MODE, (String) cmbAesMode.getSelectedItem());
+                stage.put(InterceptStage.CTX_CHARSET, (String) cmbAesCharset.getSelectedItem());
+                stage.put(InterceptStage.CTX_KEY, tfAesSecret.getText());
                 String keyFormat = rbAesSecretHex.isSelected() ? InterceptStage.FORMAT_HEX : (rbAesSecretBase64.isSelected() ? InterceptStage.FORMAT_BASE64 : InterceptStage.FORMAT_RAW);
-                model.put(InterceptStage.CTX_KEY_FORMAT, keyFormat);
+                stage.put(InterceptStage.CTX_KEY_FORMAT, keyFormat);
                 if (alg.equals(InterceptStage.ALG_AES_EBC_PKCS5_PADDING)) {
                     // EBC mode does not use IV
                 } else {
                     if (cbIsIVFixed.isSelected()) {
-                        model.put(InterceptStage.CTX_IV, tfAesSecret.getText());
+                        stage.put(InterceptStage.CTX_IV_FIXED, true);
+                        stage.put(InterceptStage.CTX_IV, tfAesSecret.getText());
                         String ivFormat = rbAesIvHex.isSelected() ? InterceptStage.FORMAT_HEX : (rbAesIvBase64.isSelected() ? InterceptStage.FORMAT_BASE64 : InterceptStage.FORMAT_RAW);
-                        model.put(InterceptStage.CTX_KEY_FORMAT, ivFormat);
+                        stage.put(InterceptStage.CTX_IV_FORMAT, ivFormat);
+                    } else {
+                        stage.put(InterceptStage.CTX_IV_FIXED, false);
                     }
-                    model.put(InterceptStage.CTX_IV_POSITION, (String) cmbAesIvPos.getSelectedItem());
+                    stage.put(InterceptStage.CTX_IV_POSITION, (String) cmbAesIvPos.getSelectedItem());
                 }
-                model.put(InterceptStage.CTX_CIPHER_ENCODING, (String) cmbAesCipherEncoding.getSelectedItem());
+                stage.put(InterceptStage.CTX_CIPHER_ENCODING, (String) cmbAesCipherEncoding.getSelectedItem());
             } else {
                 // RSA
-                model.put(InterceptStage.CTX_ALGORITHM, InterceptStage.ALG_RSA_ECB_PKCS1PADDING);
-                model.put(InterceptStage.CTX_MODE, (String) cmbRsaMode.getSelectedItem());
-                model.put(InterceptStage.CTX_CHARSET, (String) cmbRsaCharset.getSelectedItem());
-                model.put(InterceptStage.CTX_KEY, taRsaKey.getText());
+                stage.put(InterceptStage.CTX_ALGORITHM, InterceptStage.ALG_RSA_ECB_PKCS1PADDING);
+                stage.put(InterceptStage.CTX_MODE, (String) cmbRsaMode.getSelectedItem());
+                stage.put(InterceptStage.CTX_CHARSET, (String) cmbRsaCharset.getSelectedItem());
+                stage.put(InterceptStage.CTX_KEY, taRsaKey.getText());
                 String keyFormat = rbRsaKeyHex.isSelected() ? InterceptStage.FORMAT_HEX : (rbRsaKeyBase64.isSelected() ? InterceptStage.FORMAT_BASE64 : InterceptStage.FORMAT_RAW);
-                model.put(InterceptStage.CTX_KEY_FORMAT, keyFormat);
-                model.put(InterceptStage.CTX_CIPHER_ENCODING, (String) cmbRsaCipherEncoding.getSelectedItem());
+                stage.put(InterceptStage.CTX_KEY_FORMAT, keyFormat);
+                stage.put(InterceptStage.CTX_CIPHER_ENCODING, (String) cmbRsaCipherEncoding.getSelectedItem());
             }
         } else {
-            model.put(InterceptStage.CTX_ALGORITHM, (String) cmbHashAlgorithms.getSelectedItem());
-            model.put(InterceptStage.CTX_CHARSET, (String) cmbHashCharset.getSelectedItem());
+            stage.put(InterceptStage.CTX_ALGORITHM, (String) cmbHashAlgorithms.getSelectedItem());
+            stage.put(InterceptStage.CTX_CHARSET, (String) cmbHashCharset.getSelectedItem());
         }
-        return model;
+        return stage;
     }
 
+    private void clearEncodingPanel() {
+        rbEncodingBase64Alg.setSelected(true);
+        cmbEncodingCharset.setSelectedIndex(0);
+        cmbEncodingMode.setSelectedIndex(0);
+    }
+    private void clearAESPanel() {
+        cmbAesAlgorithms.setSelectedIndex(0);
+        cmbAesMode.setSelectedIndex(0);
+        cmbAesCharset.setSelectedIndex(0);
+        tfAesSecret.setText("");
+        rbAesSecretRaw.setSelected(true);
+        cbIsIVFixed.setSelected(false);
+        cbIsIVFixed.setVisible(false);
+        tfAesIv.setText("");
+        tfAesIv.setVisible(false);
+        rbAesIvRaw.setSelected(true);
+        rbAesIvRaw.setVisible(false);
+        rbAesIvHex.setVisible(false);
+        rbAesIvBase64.setVisible(false);
+        cmbAesIvPos.setSelectedIndex(0);
+        cmbAesCipherEncoding.setSelectedIndex(0);
+    }
+    
+    private void clearRSAPanel() {
+        cmbRsaMode.setSelectedIndex(0);
+        cmbRsaCharset.setSelectedIndex(0);
+        cmbRsaCipherEncoding.setSelectedIndex(0);
+        rbRsaKeyRaw.setSelected(true);
+        taRsaKey.setText("");
+    }
+    
+    private void clearHashingPanel() {
+        cmbHashAlgorithms.setSelectedIndex(0);
+        cmbHashCharset.setSelectedIndex(0);
+    }
+    
+    private void clearEncryptionPanel() {
+        rbAlgAES.setSelected(true);
+        CardLayout layout = (CardLayout) algEncryptionOptions.getLayout();
+        clearAESPanel();
+        clearRSAPanel();
+        layout.show(algEncryptionOptions, "AESOptionsPanel");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -694,8 +752,7 @@ public class InterceptStageForm extends javax.swing.JPanel {
                     .addComponent(rbCategoryEncryption)
                     .addComponent(rbCategoryHashing))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(algCategoryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(algCategoryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -752,6 +809,49 @@ public class InterceptStageForm extends javax.swing.JPanel {
         rbAesIvHex.setVisible(visible);
         rbAesIvBase64.setVisible(visible);
     }//GEN-LAST:event_cbIsIVFixedItemStateChanged
+
+    public void setComponentEnabled(boolean enabled) {
+        // algorithm categories
+        rbCategoryEncoding.setEnabled(enabled);
+        rbCategoryEncryption.setEnabled(enabled);
+        rbCategoryHashing.setEnabled(enabled);
+        // encoding panel
+        rbEncodingBase64Alg.setEnabled(enabled);
+        rbEncodingHexAlg.setEnabled(enabled);
+        cmbEncodingMode.setEnabled(enabled);
+        cmbEncodingCharset.setEnabled(enabled);
+        // encrypting panel
+        rbAlgAES.setEnabled(enabled);
+        rbAlgRSA.setEnabled(enabled);
+        // aes
+        cmbAesAlgorithms.setEnabled(enabled);
+        cmbAesMode.setEnabled(enabled);
+        cmbAesCharset.setEnabled(enabled);
+        tfAesSecret.setEnabled(enabled);
+        rbAesSecretRaw.setEnabled(enabled);
+        rbAesSecretHex.setEnabled(enabled);
+        rbAesSecretBase64.setEnabled(enabled);
+        cbIsIVFixed.setEnabled(enabled);
+        tfAesIv.setEnabled(enabled);
+        rbAesIvRaw.setEnabled(enabled);
+        rbAesIvHex.setEnabled(enabled);
+        rbAesIvBase64.setEnabled(enabled);
+        cmbAesIvPos.setEnabled(enabled);
+        cmbAesCipherEncoding.setEnabled(enabled);
+        // rsa
+        cmbRsaMode.setEnabled(enabled);
+        cmbRsaCharset.setEnabled(enabled);
+        cmbRsaCipherEncoding.setEnabled(enabled);
+        rbRsaKeyRaw.setEnabled(enabled);
+        rbRsaKeyHex.setEnabled(enabled);
+        rbRsaKeyBase64.setEnabled(enabled);
+        btnImportRsaKey.setEnabled(enabled);
+        taRsaKey.setEnabled(enabled);
+        taRsaKey.setEditable(enabled);
+        // hashing panel
+        cmbHashAlgorithms.setEnabled(enabled);
+        cmbHashCharset.setEnabled(enabled);
+    }
 
     private class RBAlgCategoryItemListener implements ItemListener {
 

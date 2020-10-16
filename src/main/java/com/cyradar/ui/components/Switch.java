@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.Rectangle2D;
@@ -135,6 +136,7 @@ public class Switch extends AbstractButton implements MouseListener {
             OnOff = !OnOff;
             repaint();
             fireActionPerformed(new ActionEvent(this, 1, ""));
+            fireItemStateChanged(new ItemEvent(this, ItemEvent.ITEM_STATE_CHANGED, OnOff, OnOff? ItemEvent.SELECTED: ItemEvent.DESELECTED));
         }
     }
 
