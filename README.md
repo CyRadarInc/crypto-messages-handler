@@ -53,3 +53,11 @@ Supported algorithms:
 | `Ctrl - LEFT` | Move tab backwards |
 | `Ctrl - RIGHT` | Move tab forwards |
 
+# About
+- UI/UX inspired by [Custom Parameter Handler](https://github.com/elespike/burp-cph)
+- If you find any issues or have any improving ideas about the extension's features, UI/UX design,
+feel free to create an issue, create pull requests on github; or contact me via email.
+# 
+**Phi Cong Nguyen**  
+Penetration tester, CyRadar Inc  
+phinc27@cyradar.com | phinc27@gmail.com
