@@ -33,7 +33,7 @@ Supported algorithms:
 - Click '...' or keyboard shortcut `Ctrl - N` to add an empty tab
 - To clone an existing tab, use `Ctrl - Shift - N`
 ### Renaming tabs
-- Double click on the tab title or press `F2'
+- Double click on the tab title or press `F2`
 - Press `Enter` when finished
 ### Modifying tab configurations
 - Click on the switch in the top right corner to disable/enable the configuration tab
