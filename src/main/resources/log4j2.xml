@@ -9,7 +9,7 @@
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="com.cyradar.ui.CyInterceptor" level="info">
+        <Logger name="com.cyradar.ui.CryptoMessagesHandler" level="info">
             <AppenderRef ref="TextAreaAppender"/>
         </Logger>
         <Root level="info">

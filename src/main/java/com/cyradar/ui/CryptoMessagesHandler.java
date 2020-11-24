@@ -50,22 +50,22 @@ import org.apache.logging.log4j.core.config.LoggerConfig;
  *
  * @author phinc27
  */
-public final class CyInterceptor extends javax.swing.JPanel implements ChangeListener {
+public final class CryptoMessagesHandler extends javax.swing.JPanel implements ChangeListener {
 
     private AppConfiguration configuration;
-    private static final Logger logger = LogManager.getLogger("com.cyradar.ui.CyInterceptor");
+    private static final Logger logger = LogManager.getLogger("com.cyradar.ui.CryptoMessagesHandler");
     /**
      * count is used to count the number of tabs has been added.
      */
     private int count;
 
     /**
-     * Creates new form CyInterceptor
+     * Creates new form CryptoMessagesHandler
      */
-    public CyInterceptor() {
+    public CryptoMessagesHandler() {
         initComponents();
         initTabbedPaneKeyStrokes();
-        main.addChangeListener(CyInterceptor.this);
+        main.addChangeListener(CryptoMessagesHandler.this);
         setConfiguration(AppConfiguration.getDefault());
         TextAreaAppender.setTextArea(taLogging);
     }
@@ -81,7 +81,7 @@ public final class CyInterceptor extends javax.swing.JPanel implements ChangeLis
         cboxComparer.setSelected(toolScopes.getOrDefault(AppConfiguration.TOOL_COMPARER, Boolean.FALSE));
         cboxDecoder.setSelected(toolScopes.getOrDefault(AppConfiguration.TOOL_DECODER, Boolean.FALSE));
         cboxExtender.setSelected(toolScopes.getOrDefault(AppConfiguration.TOOL_EXTENDER, Boolean.FALSE));
-        cboxInstruder.setSelected(toolScopes.getOrDefault(AppConfiguration.TOOL_INTRUDER, Boolean.FALSE));
+        cboxIntruder.setSelected(toolScopes.getOrDefault(AppConfiguration.TOOL_INTRUDER, Boolean.FALSE));
         cboxProxy.setSelected(toolScopes.getOrDefault(AppConfiguration.TOOL_PROXY, Boolean.FALSE));
         cboxRepeater.setSelected(toolScopes.getOrDefault(AppConfiguration.TOOL_REPEATER, Boolean.FALSE));
         cboxScanner.setSelected(toolScopes.getOrDefault(AppConfiguration.TOOL_SCANNER, Boolean.FALSE));
@@ -338,7 +338,7 @@ public final class CyInterceptor extends javax.swing.JPanel implements ChangeLis
         cboxSpider = new javax.swing.JCheckBox();
         cboxRepeater = new javax.swing.JCheckBox();
         cboxSequencer = new javax.swing.JCheckBox();
-        cboxInstruder = new javax.swing.JCheckBox();
+        cboxIntruder = new javax.swing.JCheckBox();
         cboxScanner = new javax.swing.JCheckBox();
         cboxExtender = new javax.swing.JCheckBox();
         cboxDecoder = new javax.swing.JCheckBox();
@@ -393,11 +393,11 @@ public final class CyInterceptor extends javax.swing.JPanel implements ChangeLis
             }
         });
 
-        cboxInstruder.setSelected(true);
-        cboxInstruder.setText("Instruder");
-        cboxInstruder.addItemListener(new java.awt.event.ItemListener() {
+        cboxIntruder.setSelected(true);
+        cboxIntruder.setText("Intruder");
+        cboxIntruder.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cboxInstruderItemStateChanged(evt);
+                cboxIntruderItemStateChanged(evt);
             }
         });
 
@@ -452,7 +452,7 @@ public final class CyInterceptor extends javax.swing.JPanel implements ChangeLis
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboxSequencer)
-                            .addComponent(cboxInstruder)
+                            .addComponent(cboxIntruder)
                             .addComponent(cboxScanner))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,7 +471,7 @@ public final class CyInterceptor extends javax.swing.JPanel implements ChangeLis
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cboxTarget)
-                    .addComponent(cboxInstruder)
+                    .addComponent(cboxIntruder)
                     .addComponent(cboxComparer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -626,10 +626,10 @@ public final class CyInterceptor extends javax.swing.JPanel implements ChangeLis
         configuration.getToolScopes().put(AppConfiguration.TOOL_SEQUENCER, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxSequencerItemStateChanged
 
-    private void cboxInstruderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxInstruderItemStateChanged
+    private void cboxIntruderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxIntruderItemStateChanged
         logger.debug("tool scope INTRUDER enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
         configuration.getToolScopes().put(AppConfiguration.TOOL_INTRUDER, evt.getStateChange() == ItemEvent.SELECTED);
-    }//GEN-LAST:event_cboxInstruderItemStateChanged
+    }//GEN-LAST:event_cboxIntruderItemStateChanged
 
     private void cboxScannerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxScannerItemStateChanged
         logger.debug("tool scope SCANNER enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
@@ -696,7 +696,7 @@ public final class CyInterceptor extends javax.swing.JPanel implements ChangeLis
             Configuration conf = ctx.getConfiguration();
             LoggerConfig root = conf.getLoggerConfig(LogManager.ROOT_LOGGER_NAME);
             root.setLevel(level);
-            LoggerConfig named = conf.getLoggerConfig("com.cyradar.ui.CyInterceptor");
+            LoggerConfig named = conf.getLoggerConfig("com.cyradar.ui.CryptoMessagesHandler");
             Level currentLevel = named.getLevel();
             named.setLevel(level);
             logger.log(Level.OFF, "Log verbosity level change " + currentLevel.name() + " => " + level.name());
@@ -819,7 +819,7 @@ public final class CyInterceptor extends javax.swing.JPanel implements ChangeLis
     private javax.swing.JCheckBox cboxComparer;
     private javax.swing.JCheckBox cboxDecoder;
     private javax.swing.JCheckBox cboxExtender;
-    private javax.swing.JCheckBox cboxInstruder;
+    private javax.swing.JCheckBox cboxIntruder;
     private javax.swing.JCheckBox cboxProxy;
     private javax.swing.JCheckBox cboxRepeater;
     private javax.swing.JCheckBox cboxScanner;

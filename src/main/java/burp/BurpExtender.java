@@ -11,7 +11,7 @@ import com.cyradar.models.AppConfiguration;
 import com.cyradar.models.InterceptStage;
 import com.cyradar.models.InterceptTargetParameter;
 import com.cyradar.models.InterceptTargetUrl;
-import com.cyradar.ui.CyInterceptor;
+import com.cyradar.ui.CryptoMessagesHandler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -34,16 +34,16 @@ import org.apache.logging.log4j.Logger;
 public class BurpExtender implements IBurpExtender, IHttpListener, ITab {
 
     public static IBurpExtenderCallbacks callbacks;
-    private static final String EXTENSION_NAME = "CyInterceptor";
-    private static final Logger logger = LogManager.getLogger("com.cyradar.ui.CyInterceptor");
-    private CyInterceptor ui;
+    private static final String EXTENSION_NAME = "CMH";
+    private static final Logger logger = LogManager.getLogger("com.cyradar.ui.CryptoMessagesHandler");
+    private CryptoMessagesHandler ui;
 
     @Override
     public void registerExtenderCallbacks(IBurpExtenderCallbacks callbacks) {
         BurpExtender.callbacks = callbacks;
 
         // register UI tab
-        ui = new CyInterceptor();
+        ui = new CryptoMessagesHandler();
         callbacks.addSuiteTab(this);
 
         // register http listener. Burp will invoke processHttpMessage whenever a request/response go through

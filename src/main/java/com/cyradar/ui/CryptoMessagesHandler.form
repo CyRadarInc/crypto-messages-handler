@@ -122,7 +122,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="cboxSequencer" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cboxInstruder" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cboxIntruder" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="cboxScanner" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -148,7 +148,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="cboxTarget" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cboxInstruder" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cboxIntruder" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cboxComparer" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -209,13 +209,13 @@
                     <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboxSequencerItemStateChanged"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="cboxInstruder">
+                <Component class="javax.swing.JCheckBox" name="cboxIntruder">
                   <Properties>
                     <Property name="selected" type="boolean" value="true"/>
-                    <Property name="text" type="java.lang.String" value="Instruder"/>
+                    <Property name="text" type="java.lang.String" value="Intruder"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboxInstruderItemStateChanged"/>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cboxIntruderItemStateChanged"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cboxScanner">

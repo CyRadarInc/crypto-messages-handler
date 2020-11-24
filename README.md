@@ -1,4 +1,4 @@
-# CyInterceptor
+# Crypto Messages Handler
 #### Burp suite extension for modifying HTTP Messages relied on cryptography.
 Automatically modifying parameters by using encoding/decoding,
 encrypting/decrypting or hashing algorithms set in configuration tabs.  
@@ -18,10 +18,11 @@ Supported algorithms:
 
 # Installation
 ### Manual installation
-1. Download the [latest release](https://github.com/CyRadarInc/cy-interceptor/releases) or manually compile from repo
+1. Download the [latest release](https://github.com/CyRadarInc/crypto-messages-handler/releases) or manually compile from repo
     ```shell script
-    git clone https://github.com/CyRadarInc/cy-interceptor.git
-    cd cy-interceptor
+    git clone https://github.com/CyRadarInc/crypto-messages-handler.git
+    cd crypto-messages-handler
+    mvn clean install
     mvn clean compile assembly:single
     ```
 2. Go to *Extender > Extensions > Add*, point to the location of downloaded/compiled jar file
