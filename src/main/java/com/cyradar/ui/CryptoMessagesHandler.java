@@ -602,57 +602,57 @@ public final class CryptoMessagesHandler extends javax.swing.JPanel implements C
     }// </editor-fold>//GEN-END:initComponents
 
     private void cboxProxyItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxProxyItemStateChanged
-        logger.debug("tool scope PROXY enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
+        logger.debug("tool scope PROXY enabled: " + String.valueOf(evt.getStateChange() == ItemEvent.SELECTED));
         configuration.getToolScopes().put(AppConfiguration.TOOL_PROXY, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxProxyItemStateChanged
 
     private void cboxTargetItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxTargetItemStateChanged
-        logger.debug("tool scope TARGET enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
+        logger.debug("tool scope TARGET enabled: " + String.valueOf(evt.getStateChange() == ItemEvent.SELECTED));
         configuration.getToolScopes().put(AppConfiguration.TOOL_TARGET, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxTargetItemStateChanged
 
     private void cboxSpiderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxSpiderItemStateChanged
-        logger.debug("tool scope SPIDER enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
+        logger.debug("tool scope SPIDER enabled: " + String.valueOf(evt.getStateChange() == ItemEvent.SELECTED));
         configuration.getToolScopes().put(AppConfiguration.TOOL_SPIDER, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxSpiderItemStateChanged
 
     private void cboxRepeaterItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxRepeaterItemStateChanged
-        logger.debug("tool scope REPEATER enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
+        logger.debug("tool scope REPEATER enabled: " + String.valueOf(evt.getStateChange() == ItemEvent.SELECTED));
         configuration.getToolScopes().put(AppConfiguration.TOOL_REPEATER, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxRepeaterItemStateChanged
 
     private void cboxSequencerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxSequencerItemStateChanged
-        logger.debug("tool scope SEQUENCER enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
+        logger.debug("tool scope SEQUENCER enabled: " + String.valueOf(evt.getStateChange() == ItemEvent.SELECTED));
         configuration.getToolScopes().put(AppConfiguration.TOOL_SEQUENCER, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxSequencerItemStateChanged
 
     private void cboxIntruderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxIntruderItemStateChanged
-        logger.debug("tool scope INTRUDER enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
+        logger.debug("tool scope INTRUDER enabled: " + String.valueOf(evt.getStateChange() == ItemEvent.SELECTED));
         configuration.getToolScopes().put(AppConfiguration.TOOL_INTRUDER, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxIntruderItemStateChanged
 
     private void cboxScannerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxScannerItemStateChanged
-        logger.debug("tool scope SCANNER enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
+        logger.debug("tool scope SCANNER enabled: " + String.valueOf(evt.getStateChange() == ItemEvent.SELECTED));
         configuration.getToolScopes().put(AppConfiguration.TOOL_SCANNER, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxScannerItemStateChanged
 
     private void cboxExtenderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxExtenderItemStateChanged
-        logger.debug("tool scope EXTENDER enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
+        logger.debug("tool scope EXTENDER enabled: " + String.valueOf(evt.getStateChange() == ItemEvent.SELECTED));
         configuration.getToolScopes().put(AppConfiguration.TOOL_EXTENDER, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxExtenderItemStateChanged
 
     private void cboxDecoderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxDecoderItemStateChanged
-        logger.debug("tool scope DECODER enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
+        logger.debug("tool scope DECODER enabled: " + String.valueOf(evt.getStateChange() == ItemEvent.SELECTED));
         configuration.getToolScopes().put(AppConfiguration.TOOL_DECODER, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxDecoderItemStateChanged
 
     private void cboxComparerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxComparerItemStateChanged
-        logger.debug("tool scope COMPARER enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
+        logger.debug("tool scope COMPARER enabled: " + String.valueOf(evt.getStateChange() == ItemEvent.SELECTED));
         configuration.getToolScopes().put(AppConfiguration.TOOL_COMPARER, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxComparerItemStateChanged
 
     private void cboxSuiteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboxSuiteItemStateChanged
-        logger.debug("tool scope SUITE enabled: ", evt.getStateChange() == ItemEvent.SELECTED);
+        logger.debug("tool scope SUITE enabled: " + String.valueOf(evt.getStateChange() == ItemEvent.SELECTED));
         configuration.getToolScopes().put(AppConfiguration.TOOL_SUITE, evt.getStateChange() == ItemEvent.SELECTED);
     }//GEN-LAST:event_cboxSuiteItemStateChanged
 
