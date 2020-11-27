@@ -2,11 +2,11 @@ Uuid: 7ca8a41fa64e44f4b0be2810159c527e
 ExtensionType: 1
 Name: Crypto Messages Handler
 RepoName: crypto-messages-handler
-ScreenVersion: 1.0.2
-SerialVersion: 1
+ScreenVersion: 1.0.3
+SerialVersion: 3
 MinPlatformVersion: 0
 ProOnly: False
 Author: Phi Cong Nguyen (CyRadar)
 ShortDescription: Automatically modify parameters by using encoding/decoding, encrypting/decrypting or hashing algorithms set in configuration tabs.
-EntryPoint: target/crypto-messages-handler-1.0-SNAPSHOT-jar-with-dependencies.jar
-BuildCommand: mvn clean install && mvn clean compile assembly:single
+EntryPoint: target/crypto-messages-handler-1.0-SNAPSHOT.jar
+BuildCommand: mvn clean install
