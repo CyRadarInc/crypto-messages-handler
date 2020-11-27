@@ -23,7 +23,6 @@ Supported algorithms:
     git clone https://github.com/CyRadarInc/crypto-messages-handler.git
     cd crypto-messages-handler
     mvn clean install
-    mvn clean compile assembly:single
     ```
 2. Go to *Extender > Extensions > Add*, point to the location of downloaded/compiled jar file
 3. Enjoy
